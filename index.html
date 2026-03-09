@@ -5,17 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Ad Generator</title>
 
+  <!-- Vue 3 global build — works with file:// and any HTTP host -->
+  <script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.prod.js"></script>
   <!-- jsPDF for PDF export -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-
-  <!-- Vue 3 importmap -->
-  <script type="importmap">
-  {
-    "imports": {
-      "vue": "https://cdn.jsdelivr.net/npm/vue@3.4.21/dist/vue.esm-browser.js"
-    }
-  }
-  </script>
 
   <style>
     /* ---- Reset & base ---- */
@@ -731,11 +724,25 @@
 </head>
 <body>
   <div id="app"></div>
-  <script type="module" src="src/app.js"></script>
+
+  <!-- shared namespace, then deps in load order -->
+  <script>window.AdGen = {}</script>
+  <script src="src/state.js"></script>
+  <script src="src/renderer.js"></script>
+  <script src="src/components/Step1Image.js"></script>
+  <script src="src/components/Step2Template.js"></script>
+  <script src="src/components/Step3Content.js"></script>
+  <script src="src/components/Step4Style.js"></script>
+  <script src="src/components/Step5Preview.js"></script>
+  <script src="src/components/Step6Export.js"></script>
+  <script src="src/components/Gallery.js"></script>
+  <script src="src/components/Wizard.js"></script>
+  <script src="src/components/App.js"></script>
+  <script src="src/app.js"></script>
 
   <script>
     // Version sentinel — bump after every code change
-    window.V = '2'
+    window.V = '3'
   </script>
 </body>
 </html>
